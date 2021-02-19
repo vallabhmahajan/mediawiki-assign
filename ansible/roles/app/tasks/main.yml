@@ -1,0 +1,45 @@
+- name: Download mediawiki tar file
+  get_url:
+    url: https://releases.wikimedia.org/mediawiki/1.35/mediawiki-1.35.1.tar.gz
+    dest: /var/www/html/mediawiki-1.35.1.tar.gz
+
+- name: Extract mediawiki content
+  unarchive:
+    src: /var/www/html/mediawiki-1.35.1.tar.gz
+    dest: /var/www/html
+    remote_src: yes
+
+- name: Create symbolic link
+  file:
+   dest: "/var/www/html/mediawiki-1.35.1"
+   src: "/var/www/html/mediawiki"
+   state: link
+   force: yes
+
+- name: Copy desired http conf on remote
+  copy:
+    src: "httpd.conf"
+    dest: "/etc/httpd/conf/httpd.conf"
+    mode: '0644'
+
+- name: Recursively change ownership of a /var/www directory
+  file:
+    path: /var/www
+    state: directory
+    recurse: yes
+    owner: apache
+    group: apache
+
+- name: Enable httpd service
+  service:
+    name: httpd
+    enabled: yes
+
+- name: Start httpd service
+  service:
+    name: httpd
+    state: started
+
+- name: Disable selinux
+  selinux:
+    state: disabled

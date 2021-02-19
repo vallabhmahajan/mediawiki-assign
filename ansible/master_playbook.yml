@@ -1,0 +1,8 @@
+---
+- name: This is master playbook
+  hosts: "{{ tier_type }}"
+  gather_hosts: true
+  become: True
+
+  roles:
+    - "{{ tier_type }}"

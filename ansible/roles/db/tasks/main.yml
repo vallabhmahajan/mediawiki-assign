@@ -1,0 +1,8 @@
+- name: Copy desired sql script
+  copy:
+    src: "db_setup.sql"
+    dest: "/home/centos/db_setup.sql"
+    mode: '0555'
+
+- name: Execute sql script
+  shell: mysql -u root < /home/centos/db_setup.sql

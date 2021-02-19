@@ -1,0 +1,9 @@
+aws_access_key = "xxxxxxxxx"
+aws_secret_key = "xxxxxxxxx"
+aws_region = "ap-south-1"
+ami = "ami-02e60be79e78fef21"
+vpc_cidr = "172.20.0.0/16"
+public_cidr_block = ["172.20.10.0/24", "172.20.11.0/24"]
+private_cidr_block = "172.20.20.0/24"
+instance_type = "t2.micro"
+availability_zone = ["ap-south-1a", "ap-south-1b"]
